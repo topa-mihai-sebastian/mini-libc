@@ -32,10 +32,10 @@ function grade_style()
         compiler_down=2
     fi
 
-    cpplint=$(< checker.out grep "Total errors found:" | rev | cut -d ' ' -f 1 | rev)
-    checkpatch_err=$(< checker.out grep 'total: [0-9]* errors' | grep -o '[0-9]* errors,' | \
+    cpplint=$(< linter.out grep "Total errors found:" | rev | cut -d ' ' -f 1 | rev)
+    checkpatch_err=$(< linter.out grep 'total: [0-9]* errors' | grep -o '[0-9]* errors,' | \
         cut -d ' ' -f 1 | paste -s -d '+' | bc)
-    checkpatch_warn=$(< checker.out grep 'total: [0-9]* errors' | grep -o '[0-9]* warnings,' | \
+    checkpatch_warn=$(< linter.out grep 'total: [0-9]* errors' | grep -o '[0-9]* warnings,' | \
         cut -d ' ' -f 1 | paste -s -d '+' | bc)
     if test -z "$checkpatch_err"; then
         checkpatch_err=0
@@ -67,11 +67,11 @@ function grade_style()
     echo "$style_grade" > style_grade.out
 
     {
-        < checker.out grep -v 'unused parameter' | grep -v 'unused variable' | grep -v "discards 'const'" | \
+        < linter.out grep -v 'unused parameter' | grep -v 'unused variable' | grep -v "discards 'const'" | \
             grep '[0-9]\+:[0-9]\+: warning:'
-        < checker.out grep "Total errors found: [1-9]"
-        < checker.out grep 'total: [1-9]* errors'
-        < checker.out grep 'total: 0 errors' | grep '[1-9][0-9]* warnings'
+        < linter.out grep "Total errors found: [1-9]"
+        < linter.out grep 'total: [1-9]* errors'
+        < linter.out grep 'total: 0 errors' | grep '[1-9][0-9]* warnings'
     } > style_summary.out
 }
 
