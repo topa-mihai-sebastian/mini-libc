@@ -233,7 +233,7 @@ char *strrstr(const char *haystack, const char *needle)
 		}
 		if (*auxNeedle == '\0')
 		{
-			return aux;
+			return (char *)aux;
 		}
 	}
 	return NULL;
