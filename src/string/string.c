@@ -73,20 +73,16 @@ char *strncat(char *destination, const char *source, size_t len)
 	{
 		aux++;
 	}
-	while (len && *source)
+	while (len && *source != '\0')
 	{
 		*aux = *source;
 		aux++;
 		source++;
 		len--;
 	}
-	// if source is < len
-	while (len)
-	{
-		*aux = '\0';
-		aux++;
-		len--;
-	}
+
+	*aux = '\0';
+
 	return destination;
 }
 
