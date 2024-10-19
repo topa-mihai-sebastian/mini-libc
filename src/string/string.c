@@ -176,6 +176,32 @@ char *strrchr(const char *str, int c)
 char *strstr(const char *haystack, const char *needle)
 {
 	/* TODO: Implement strstr(). */
+	if (*needle == '\0')
+	{
+		return haystack;
+	}
+	char *aux;
+	// iteram prin sirul in care cautam
+	for (aux = haystack; *aux != '\0'; aux++)
+	{
+
+		char *current = aux;
+		char *auxNeedle = needle;
+		// daca elementul current este egal cu cel din sirul
+		//  principal continuam cautarea pana cand
+		// dam de '\0'
+		// daca s-a ajuns la '\0' in auxNeedle inseamna
+		//  ca s-a gasit subsirul pe care il cautam
+		while (*auxNeedle != '\0' && *auxNeedle == *current)
+		{
+			auxNeedle++;
+			current++;
+		}
+		if (*auxNeedle == '\0')
+		{
+			return aux;
+		}
+	}
 	return NULL;
 }
 
