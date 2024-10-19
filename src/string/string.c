@@ -157,6 +157,19 @@ char *strchr(const char *str, int c)
 char *strrchr(const char *str, int c)
 {
 	/* TODO: Implement strrchr(). */
+	char *aux = str;
+	while (*aux != '\0')
+	{
+		aux++;
+	}
+	while (aux != str)
+	{
+		if (*aux == c)
+		{
+			return aux;
+		}
+		aux--;
+	}
 	return NULL;
 }
 
