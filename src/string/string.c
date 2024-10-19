@@ -214,6 +214,13 @@ char *strrstr(const char *haystack, const char *needle)
 void *memcpy(void *destination, const void *source, size_t num)
 {
 	/* TODO: Implement memcpy(). */
+	// am castat la char pt ca un char ocupa un octet
+	const char *src = (const char *)source;
+	char *dest = (char *)destination;
+	for (size_t i = 0; i < num; i++)
+	{
+		dest[i] = src[i];
+	}
 	return destination;
 }
 
