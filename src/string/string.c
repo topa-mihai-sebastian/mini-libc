@@ -188,7 +188,7 @@ char *strstr(const char *haystack, const char *needle)
 		const char *current = aux;
 		const char *auxNeedle = needle;
 		// daca elementul current este egal cu cel din sirul
-		//  principal continuam cautarea pana cand
+		// principal continuam cautarea pana cand
 		// dam de '\0'
 		// daca s-a ajuns la '\0' in auxNeedle inseamna
 		//  ca s-a gasit subsirul pe care il cautam
