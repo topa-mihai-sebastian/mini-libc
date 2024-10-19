@@ -65,7 +65,8 @@ int strcmp(const char *str1, const char *str2)
 {
 	while (*str1 && *str2)
 	{
-		// daca exista vreo diferenta intre caractere se returneaza scaderea
+		// daca caracterele sunt diferite se returneaza -1 daca str1 este mai mic
+		// si 1 daca str1 este mai mare
 		if (*str1 != *str2)
 		{
 			int a = *(unsigned char *)str1 - *(unsigned char *)str2;
