@@ -211,7 +211,7 @@ char *strrstr(const char *haystack, const char *needle)
 	/* TODO: Implement strrstr(). */
 	if (*needle == '\0')
 	{
-		return haystack;
+		return (char *)haystack;
 	}
 	const char *aux;
 	// strlen implementat
