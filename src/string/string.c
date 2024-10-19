@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <string.h>
+
 char *strcpy(char *destination, const char *source)
 {
 	/* TODO: Implement strcpy(). */
@@ -58,6 +59,25 @@ char *strcat(char *destination, const char *source)
 char *strncat(char *destination, const char *source, size_t len)
 {
 	/* TODO: Implement strncat(). */
+	char *aux = destination;
+	while (*aux != '\0')
+	{
+		aux++;
+	}
+	while (len && *source)
+	{
+		*aux = *source;
+		aux++;
+		source++;
+		len--;
+	}
+	// if source is < len
+	while (len)
+	{
+		*aux = '\0';
+		aux++;
+		len--;
+	}
 	return destination;
 }
 
