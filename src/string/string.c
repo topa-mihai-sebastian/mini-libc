@@ -209,6 +209,33 @@ char *strstr(const char *haystack, const char *needle)
 char *strrstr(const char *haystack, const char *needle)
 {
 	/* TODO: Implement strrstr(). */
+	if (*needle == '\0')
+	{
+		return haystack;
+	}
+	const char *aux;
+	// strlen implementat
+	// folosesc acelasi principiu ca la strstr
+	// fac doar for-ul invers
+	for (aux = haystack + strlen(haystack) - strlen(needle); aux >= haystack; aux--)
+	{
+		const char *current = aux;
+		const char *auxNeedle = needle;
+		// daca elementul current este egal cu cel din sirul
+		// principal continuam cautarea pana cand
+		// dam de '\0'
+		// daca s-a ajuns la '\0' in auxNeedle inseamna
+		//  ca s-a gasit subsirul pe care il cautam
+		while (*auxNeedle != '\0' && *auxNeedle == *current)
+		{
+			auxNeedle++;
+			current++;
+		}
+		if (*auxNeedle == '\0')
+		{
+			return aux;
+		}
+	}
 	return NULL;
 }
 
