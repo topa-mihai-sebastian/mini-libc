@@ -2,6 +2,16 @@
 
 #include <string.h>
 
+size_t strlen(const char *str)
+{
+	size_t i = 0;
+
+	for (; *str != '\0'; str++, i++)
+		;
+
+	return i;
+}
+
 char *strcpy(char *destination, const char *source)
 {
 	/* TODO: Implement strcpy(). */
@@ -129,19 +139,18 @@ int strncmp(const char *str1, const char *str2, size_t len)
 	return 0;
 }
 
-size_t strlen(const char *str)
-{
-	size_t i = 0;
-
-	for (; *str != '\0'; str++, i++)
-		;
-
-	return i;
-}
-
 char *strchr(const char *str, int c)
 {
 	/* TODO: Implement strchr(). */
+	char *aux = str;
+	while (*aux != '\0')
+	{
+		if (*aux == c)
+		{
+			return aux;
+		}
+		aux++;
+	}
 	return NULL;
 }
 
