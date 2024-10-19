@@ -18,8 +18,24 @@ char *strcpy(char *destination, const char *source)
 
 char *strncpy(char *destination, const char *source, size_t len)
 {
-	/* TODO: Implement strncpy(). */
-	return destination;
+	char *aux = destination;
+
+	while (len && *source)
+	{
+		*destination = *source;
+		destination++;
+		source++;
+		len--;
+	}
+	// if source is < len
+	while (len)
+	{
+		*destination = '\0';
+		destination++;
+		len--;
+	}
+
+	return aux;
 }
 
 char *strcat(char *destination, const char *source)
