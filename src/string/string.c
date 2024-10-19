@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <string.h>
+#include <stdio.h>
 
 size_t strlen(const char *str)
 {
@@ -226,23 +227,6 @@ void *memcpy(void *destination, const void *source, size_t num)
 
 void *memmove(void *destination, const void *source, size_t num)
 {
-	char *dest = (char *)destination;
-	const char *src = (const char *)source;
-
-	if (dest < src)
-	{
-		for (size_t i = 0; i < num; i++)
-		{
-			dest[i] = src[i];
-		}
-	}
-	else
-	{
-		for (size_t i = num - 1; i >= 0; i--)
-		{
-			dest[i] = src[i];
-		}
-	}
 
 	return destination;
 }
