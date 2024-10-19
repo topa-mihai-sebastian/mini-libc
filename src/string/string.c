@@ -25,7 +25,7 @@ char *strncpy(char *destination, const char *source, size_t len)
 		*destination++ = *source++;
 		len--;
 	}
-	// if source is < len
+
 	while (len)
 	{
 		*destination++ = '\0';
