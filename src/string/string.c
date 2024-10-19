@@ -22,16 +22,13 @@ char *strncpy(char *destination, const char *source, size_t len)
 
 	while (len && *source)
 	{
-		*destination = *source;
-		destination++;
-		source++;
+		*destination++ = *source++;
 		len--;
 	}
 	// if source is < len
 	while (len)
 	{
-		*destination = '\0';
-		destination++;
+		*destination++ = '\0';
 		len--;
 	}
 
