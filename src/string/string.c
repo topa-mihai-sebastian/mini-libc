@@ -234,7 +234,19 @@ void *memmove(void *destination, const void *source, size_t num)
 int memcmp(const void *ptr1, const void *ptr2, size_t num)
 {
 	/* TODO: Implement memcmp(). */
-	return -1;
+	const char *p1 = (const char *)ptr1;
+	const char *p2 = (const char *)ptr2;
+	size_t i = 0;
+	while (i < num)
+	{
+		if (p1[i] != p2[i])
+		{
+			int ok = p1[i] - p2[i];
+			return ok;
+		}
+		i++;
+	}
+	return 0;
 }
 
 void *memset(void *source, int value, size_t num)
