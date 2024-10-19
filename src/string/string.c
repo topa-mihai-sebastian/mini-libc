@@ -180,13 +180,13 @@ char *strstr(const char *haystack, const char *needle)
 	{
 		return haystack;
 	}
-	char *aux;
+	const char *aux;
 	// iteram prin sirul in care cautam
 	for (aux = haystack; *aux != '\0'; aux++)
 	{
 
-		char *current = aux;
-		char *auxNeedle = needle;
+		const char *current = aux;
+		const char *auxNeedle = needle;
 		// daca elementul current este egal cu cel din sirul
 		//  principal continuam cautarea pana cand
 		// dam de '\0'
