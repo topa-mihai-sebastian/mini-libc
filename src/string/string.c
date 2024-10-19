@@ -25,6 +25,18 @@ char *strncpy(char *destination, const char *source, size_t len)
 char *strcat(char *destination, const char *source)
 {
 	/* TODO: Implement strcat(). */
+	char *aux = destination;
+	while (aux != '\0')
+	{
+		aux++;
+	}
+	while (*source != '\0')
+	{
+		*aux = *source;
+		aux++;
+		source++;
+	}
+	*aux = '\0';
 	return destination;
 }
 
