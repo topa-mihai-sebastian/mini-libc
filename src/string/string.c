@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <string.h>
-
 char *strcpy(char *destination, const char *source)
 {
 	/* TODO: Implement strcpy(). */
@@ -42,7 +41,7 @@ char *strcat(char *destination, const char *source)
 {
 	/* TODO: Implement strcat(). */
 	char *aux = destination;
-	while (aux != '\0')
+	while (*aux != '\0')
 	{
 		aux++;
 	}
@@ -64,8 +63,25 @@ char *strncat(char *destination, const char *source, size_t len)
 
 int strcmp(const char *str1, const char *str2)
 {
-	/* TODO: Implement strcmp(). */
-	return -1;
+	while (*str1 && *str2)
+	{
+		// daca exista vreo diferenta intre caractere se returneaza scaderea
+		if (*str1 != *str2)
+		{
+			int a = *(unsigned char *)str1 - *(unsigned char *)str2;
+			if (a < 0)
+				return -1;
+			return 1;
+		}
+		str1++;
+		str2++;
+	}
+	int a = *(unsigned char *)str1 - *(unsigned char *)str2;
+	if (a < 0)
+		return -1;
+	else if (a > 0)
+		return 1;
+	return 0;
 }
 
 int strncmp(const char *str1, const char *str2, size_t len)
