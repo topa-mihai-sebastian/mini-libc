@@ -10,7 +10,6 @@ extern "C"
 
 #include <internal/io.h>
 #include <internal/types.h>
-#include <time.h>
 
 #define SEEK_SET 0
 #define SEEK_CUR 1
@@ -22,7 +21,6 @@ extern "C"
 	off_t lseek(int fd, off_t offset, int whence);
 	int truncate(const char *path, off_t length);
 	int ftruncate(int fd, off_t length);
-	unsigned int sleep(unsigned int seconds);
 
 #ifdef __cplusplus
 }
