@@ -3,15 +3,29 @@
 #include <unistd.h>
 #include <internal/syscall.h>
 #include <errno.h>
+#include <sys/stat.h>
 
 int truncate(const char *path, off_t length)
 {
-	/* TODO: Implement truncate(). */
 	if (length < 0)
 	{
-		errno = -1; //???????
+		errno = EINVAL;
 		return -1;
 	}
+
+	struct stat path_stat;
+	if (stat(path, &path_stat) != 0)
+	{
+		errno = ENOENT;
+		return -1;
+	}
+
+	if (S_ISDIR(path_stat.st_mode))
+	{
+		errno = EISDIR;
+		return -1;
+	}
+	// mai intai fac verificari si apoi fac syscall
 	int final = syscall(__NR_truncate, path, length);
 
 	if (final == -1)
