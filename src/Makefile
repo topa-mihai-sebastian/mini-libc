@@ -13,7 +13,7 @@ SRCS = syscall.c \
        stat/fstatat.c stat/fstat.c stat/stat.c \
        io/open.c io/close.c io/read_write.c \
        io/lseek.c io/truncate.c io/ftruncate.c \
-       io/sleep.c io/puts.c \
+       io/puts.c \
        errno.c \
        crt/__libc_start_main.c
 
