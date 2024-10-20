@@ -11,6 +11,7 @@ off_t lseek(int fd, off_t offset, int whence)
 	off_t final = syscall(__NR_lseek, offset, whence);
 	if (final == (off_t)-1)
 	{
+		errno = -1;
 		return -1;
 	}
 	return final;
