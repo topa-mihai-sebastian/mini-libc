@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <fcntl.h>
-#include <internal/syscall.h>
+#include <syscall.h>
+#include "../include/internal/arch/x86_64/syscall_list.h"
 #include <stdarg.h>
 #include <errno.h>
 
