@@ -8,5 +8,6 @@
 int open(const char *filename, int flags, ...)
 {
 	/* TODO: Implement open system call. */
+
 	return -1;
 }
