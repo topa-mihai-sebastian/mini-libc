@@ -9,7 +9,7 @@ off_t lseek(int fd, off_t offset, int whence)
 	/* TODO: Implement lseek(). */
 	// 						sau 8
 	off_t final = syscall(__NR_lseek, offset, whence);
-	if (final == -1)
+	if (final == (off_t)-1)
 	{
 		return -1;
 	}
