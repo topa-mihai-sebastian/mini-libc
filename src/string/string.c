@@ -250,7 +250,13 @@ void *memcpy(void *destination, const void *source, size_t num)
 
 void *memmove(void *destination, const void *source, size_t num)
 {
-
+	char buffer[3000];
+	strcpy(buffer, source);
+	char *dest = (char *)destination;
+	for (size_t i = 0; i < num; i++)
+	{
+		dest[i] = buffer[i];
+	}
 	return destination;
 }
 
