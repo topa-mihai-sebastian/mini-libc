@@ -4,7 +4,6 @@
 
 int puts(const char *str)
 {
-
 	if (write(1, str, strlen(str)) == -1)
 	{
 		return -1;
