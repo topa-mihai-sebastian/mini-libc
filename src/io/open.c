@@ -17,7 +17,7 @@ int open(const char *filename, int flags, ...)
 		mode = va_arg(args, mode_t); // permisiunile
 		va_end(args);
 	}
-
+	// TEST TEST TEST
 	// dau syscall ca sa apelez openat cu AT_FDCWD ca sa se foloseasca folderul curent
 	int fd = syscall(__NR_openat, AT_FDCWD, filename, flags, mode);
 
