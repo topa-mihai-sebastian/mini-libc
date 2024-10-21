@@ -12,6 +12,20 @@ int truncate(const char *path, off_t length)
 		errno = EINVAL;
 		return -1;
 	}
+
+	struct stat path_stat;
+	if (stat(path, &path_stat) != 0)
+	{
+		errno = ENOENT;
+		return -1;
+	}
+
+	if (S_ISDIR(path_stat.st_mode))
+	{
+		errno = EISDIR;
+		return -1;
+	}
+
 	int final = syscall(__NR_truncate, path, length);
 
 	if (final == -1)
