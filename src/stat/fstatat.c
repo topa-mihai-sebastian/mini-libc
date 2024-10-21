@@ -44,18 +44,11 @@ struct statx
 int fstatat_statx(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat_statx(). Use statx and makedev above. */
-	struct statx stx;
-	int ret = syscall(__NR_statx, fd, path, flag, STATX_BASIC_STATS, &stx);
-	if (ret == -1)
-	{
-		return -1;
-	}
-	return 0;
+	return -1;
 }
 
 int fstatat(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat(). Use fstatat_statx(). */
-	int res = fstatat_statx(fd, path, st, flag);
-	return res;
+	return -1;
 }
