@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <internal/types.h>
-#include <time.h>
+#include "nanosleep.c"
 
 unsigned sleep(unsigned seconds)
 {

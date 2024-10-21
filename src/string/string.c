@@ -181,7 +181,6 @@ char *strstr(const char *haystack, const char *needle)
 	// iteram prin sirul in care cautam
 	for (aux = haystack; *aux != '\0'; aux++)
 	{
-
 		const char *current = aux;
 		const char *auxNeedle = needle;
 		// daca elementul current este egal cu cel din sirul
