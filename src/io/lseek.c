@@ -11,7 +11,11 @@ off_t lseek(int fd, off_t offset, int whence)
 		errno = EBADF;
 		return (off_t)-1;
 	}
-
+	if (whence != SEEK_SET && whence != SEEK_CUR && whence != SEEK_END)
+	{
+		errno = EINVAL;
+		return (off_t)-1;
+	}
 	off_t final = syscall(__NR_lseek, fd, offset, whence);
 	// cast
 	if (final == (off_t)-1)
