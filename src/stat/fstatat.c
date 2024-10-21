@@ -7,15 +7,15 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define makedev(x, y) ( \
-		(((x)&0xfffff000ULL) << 32) | \
-	(((x)&0x00000fffULL) << 8) | \
-		(((y)&0xffffff00ULL) << 12) | \
-	(((y)&0x000000ffULL)) \
-	)
+#define makedev(x, y) (             \
+	(((x) & 0xfffff000ULL) << 32) | \
+	(((x) & 0x00000fffULL) << 8) |  \
+	(((y) & 0xffffff00ULL) << 12) | \
+	(((y) & 0x000000ffULL)))
 
 /* Structure describing file characteristics as defined in linux/stat.h */
-struct statx {
+struct statx
+{
 	uint32_t stx_mask;
 	uint32_t stx_blksize;
 	uint64_t stx_attributes;
@@ -28,7 +28,8 @@ struct statx {
 	uint64_t stx_size;
 	uint64_t stx_blocks;
 	uint64_t stx_attributes_mask;
-	struct {
+	struct
+	{
 		int64_t tv_sec;
 		uint32_t tv_nsec;
 		int32_t pad;
@@ -43,11 +44,18 @@ struct statx {
 int fstatat_statx(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat_statx(). Use statx and makedev above. */
-	return -1;
+	struct statx stx;
+	int ret = syscall(__NR_statx, fd, path, flag, STATX_BASIC_STATS, &stx);
+	if (ret == -1)
+	{
+		return -1;
+	}
+	return 0;
 }
 
 int fstatat(int fd, const char *restrict path, struct stat *restrict st, int flag)
 {
 	/* TODO: Implement fstatat(). Use fstatat_statx(). */
-	return -1;
+	int res = fstatat_statx(fd, path, st, flag);
+	return res;
 }
