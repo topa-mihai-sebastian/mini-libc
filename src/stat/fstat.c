@@ -13,5 +13,9 @@ int fstat(int fd, struct stat *st)
 		return -1;
 	}
 	int fst = syscall(__NR_fstat, fd, st);
+	if (fst == -1)
+	{
+		return -1;
+	}
 	return 0;
 }
