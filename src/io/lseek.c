@@ -6,13 +6,18 @@
 
 off_t lseek(int fd, off_t offset, int whence)
 {
-	/* TODO: Implement lseek(). */
-	// 						sau 8
-	off_t final = syscall(__NR_lseek, offset, whence);
+	if (fd < 0)
+	{
+		errno = EBADF;
+		return (off_t)-1;
+	}
+
+	off_t final = syscall(__NR_lseek, fd, offset, whence);
+	// cast
 	if (final == (off_t)-1)
 	{
-		errno = -1;
-		return -1;
+		return (off_t)-1;
 	}
+
 	return final;
 }
