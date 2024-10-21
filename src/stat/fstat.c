@@ -9,6 +9,7 @@ int fstat(int fd, struct stat *st)
 	/* TODO: Implement fstat(). */
 	if (fd < 0)
 	{
+		errno = EBADF;
 		return -1;
 	}
 	int fst = syscall(__NR_fstat, fd, st);
