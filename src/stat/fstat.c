@@ -7,5 +7,10 @@
 int fstat(int fd, struct stat *st)
 {
 	/* TODO: Implement fstat(). */
-	return -1;
+	if (fd < 0)
+	{
+		return -1;
+	}
+	int fst = syscall(__NR_fstat, fd, st);
+	return 0;
 }
