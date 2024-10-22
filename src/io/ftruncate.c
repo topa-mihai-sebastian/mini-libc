@@ -22,6 +22,10 @@ int ftruncate(int fd, off_t length)
 
 	if (final == -1)
 	{
+		if (errno == EROFS)
+		{
+			errno = EACCES;
+		}
 		return -1;
 	}
 
