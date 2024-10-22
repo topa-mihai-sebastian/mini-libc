@@ -4,9 +4,25 @@
 #include <errno.h>
 #include <internal/syscall.h>
 
+#ifndef MAP_FIXED
+#define MAP_FIXED 0x10
+#endif
+
 void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 {
 	/* TODO: Implement mmap(). */
+	if (fd < 0)
+	{
+		errno = EBADF;
+		return MAP_FAILED;
+	}
+
+	if ((flags & MAP_FIXED) && (addr == NULL))
+	{
+		errno = EINVAL;
+		return MAP_FAILED;
+	}
+
 	void *res = (void *)syscall(__NR_mmap, addr, length, prot, flags, fd, offset);
 
 	if (res == MAP_FAILED)
