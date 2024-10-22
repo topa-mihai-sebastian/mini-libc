@@ -13,9 +13,10 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 	/* TODO: Implement mmap(). */
 	void *res = (void *)syscall(__NR_mmap, addr, length, prot, flags, fd, offset);
 
-	if (res == MAP_FAILED)
+	if ((long)res < 0)
 	{
-		return MAP_FAILED;
+		errno = -(long)res;
+		return MAP_FAILED; //-1
 	}
 
 	return res;
