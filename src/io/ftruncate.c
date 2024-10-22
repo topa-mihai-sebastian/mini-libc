@@ -29,7 +29,7 @@ int ftruncate(int fd, off_t length)
 		return -1;
 	}
 	*/
-	int final = syscall(ftruncate, fd, length);
+	int final = syscall(__NR_ftruncate, fd, length);
 
 	if (final < 0)
 	{
