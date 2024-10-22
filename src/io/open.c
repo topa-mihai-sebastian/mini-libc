@@ -11,6 +11,7 @@ int open(const char *filename, int flags, ...)
 
 	if (fd < 0)
 	{
+		errno = -fd;
 		return -1;
 	}
 
