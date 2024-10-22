@@ -7,17 +7,14 @@
 
 int truncate(const char *path, off_t length)
 {
-	if (length < 0)
-	{
-		errno = EINVAL;
-		return -1;
-	}
+
 	int final = syscall(__NR_truncate, path, length);
 
-	if (final == -1)
+	if (final < 0)
 	{
+		errno = -final;
 		return -1;
 	}
 
-	return 0;
+	return final;
 }
