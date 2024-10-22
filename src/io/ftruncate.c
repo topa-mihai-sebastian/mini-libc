@@ -12,6 +12,12 @@ int ftruncate(int fd, off_t length)
 		return -1;
 	}
 
+	if (fd < 0)
+	{
+		errno = -fd;
+		return -1;
+	}
+
 	int final = syscall(__NR_ftruncate, fd, length);
 
 	if (final == -1)
