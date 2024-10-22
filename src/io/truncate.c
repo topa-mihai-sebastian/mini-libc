@@ -7,7 +7,6 @@
 
 int truncate(const char *path, off_t length)
 {
-
 	int final = syscall(__NR_truncate, path, length);
 
 	if (final < 0)
