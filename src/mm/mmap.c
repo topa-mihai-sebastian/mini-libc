@@ -17,12 +17,6 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 		return MAP_FAILED;
 	}
 
-	if ((flags & MAP_FIXED) && (addr == NULL))
-	{
-		errno = EINVAL;
-		return MAP_FAILED;
-	}
-
 	void *res = (void *)syscall(__NR_mmap, addr, length, prot, flags, fd, offset);
 
 	if (res == MAP_FAILED)
