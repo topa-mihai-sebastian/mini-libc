@@ -144,7 +144,7 @@ char *strchr(const char *str, int c)
 	{
 		if (*aux == c)
 		{
-			return aux;
+			return (char *)aux;
 		}
 		aux++;
 	}
@@ -163,7 +163,7 @@ char *strrchr(const char *str, int c)
 	{
 		if (*aux == c)
 		{
-			return aux;
+			return (char *)aux;
 		}
 		aux--;
 	}
@@ -175,7 +175,7 @@ char *strstr(const char *haystack, const char *needle)
 	/* TODO: Implement strstr(). */
 	if (*needle == '\0')
 	{
-		return haystack;
+		return (char *)haystack;
 	}
 	const char *aux;
 	// iteram prin sirul in care cautam
@@ -195,7 +195,7 @@ char *strstr(const char *haystack, const char *needle)
 		}
 		if (*auxNeedle == '\0')
 		{
-			return aux;
+			return (char *)aux;
 		}
 	}
 	return NULL;
