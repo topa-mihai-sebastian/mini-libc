@@ -6,7 +6,7 @@
 
 int ftruncate(int fd, off_t length)
 {
-	if (length < 0)
+	/*if (length < 0)
 	{
 		errno = EINVAL;
 		return -1;
@@ -28,6 +28,14 @@ int ftruncate(int fd, off_t length)
 		}
 		return -1;
 	}
+	*/
+	int final = syscall(ftruncate, fd, length);
 
-	return 0;
+	if (final < 0)
+	{
+		errno = -final;
+		return -1;
+	}
+
+	return final;
 }
