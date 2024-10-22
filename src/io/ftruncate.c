@@ -14,7 +14,7 @@ int ftruncate(int fd, off_t length)
 
 	if (fd < 0)
 	{
-		errno = -fd;
+		errno = EBADF;
 		return -1;
 	}
 
