@@ -12,12 +12,8 @@ int stat(const char *restrict path, struct stat *restrict buf)
 	int st = (int)syscall(__NR_stat, path, buf);
 	if (st == -1)
 	{
-		if (errno == ENOENT)
-		{
-			// test_stat_non_existent_file
-			return -1;
-		}
+		errno = -st;
 		return -1;
 	}
-	return 0;
+	return st;
 }
