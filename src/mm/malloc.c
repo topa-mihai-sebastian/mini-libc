@@ -102,14 +102,12 @@ void *realloc(void *ptr, size_t size)
 	// vreau sa vad daca marimea noua este mai mare sau mai mica decat
 	// cea veche
 	size_t copy_size;
+
 	if (item->len < size)
-	{
 		copy_size = item->len;
-	}
 	else
-	{
 		copy_size = size;
-	}
+
 	// copiez datele in noul void*
 	memcpy(new_ptr, ptr, copy_size);
 	// eliberez vechiul void*
