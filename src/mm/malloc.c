@@ -10,15 +10,20 @@
 void *malloc(size_t size)
 {
 	void *memory;
+	// initializam lista
 	mem_list_init();
+	// alocam memoria folosind mmap (rezervam memorie)
 	memory = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if (memory == MAP_FAILED)
+
+	if (memory == MAP_FAILED) //-1
 	{
 		return NULL;
 	}
-
-	if (mem_list_add(memory, size) != 0)
+	// adaugam blocul alocat de memorie in lista de memorie
+	int res = mem_list_add(memory, size);
+	if (res != 0)
 	{
+		// daca a dat fail eliberam memoria alocata
 		munmap(memory, size);
 		return NULL;
 	}
@@ -43,6 +48,12 @@ void *calloc(size_t nmemb, size_t size)
 
 void free(void *ptr)
 {
+	// verific daca se vrea sa se dea free la un pointer null
+	if (ptr == NULL)
+	{
+		return;
+	}
+
 	struct mem_list *item;
 
 	item = mem_list_find(ptr);
@@ -51,13 +62,16 @@ void free(void *ptr)
 		return;
 	}
 
+	// scot blocul de memorie din lista
 	mem_list_del(ptr);
 
+	// dau free cu munmap
 	munmap(ptr, item->len);
 }
 
 void *realloc(void *ptr, size_t size)
 {
+	// verificari
 	if (ptr == NULL)
 	{
 		return malloc(size);
@@ -68,23 +82,35 @@ void *realloc(void *ptr, size_t size)
 		free(ptr);
 		return NULL;
 	}
+	// creez un nou element in lista si verifc sa fie totul ok
 	struct mem_list *item = mem_list_find(ptr);
+
 	if (item == NULL)
 	{
 		return NULL;
 	}
-
+	// creez un void* de marimea size
 	void *new_ptr = malloc(size);
 	if (new_ptr == NULL)
 	{
 		return NULL;
 	}
-
-	size_t copy_size = item->len < size ? item->len : size;
+	// vreau sa vad daca marimea noua este mai mare sau mai mica decat
+	// cea veche
+	size_t copy_size;
+	if (item->len < size)
+	{
+		copy_size = item->len;
+	}
+	else
+	{
+		copy_size = size;
+	}
+	// copiez datele in noul void*
 	memcpy(new_ptr, ptr, copy_size);
-
+	// eliberez vechiul void*
 	free(ptr);
-
+	// returnez noul void*
 	return new_ptr;
 }
 
