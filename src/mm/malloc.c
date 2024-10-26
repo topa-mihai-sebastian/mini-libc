@@ -7,11 +7,18 @@
 #include <string.h>
 #include <stdlib.h>
 
+// se da malloc pe aceasi adresa
+static int isOn = 0;
+
 void *malloc(size_t size)
 {
 	void *memory;
 	// initializam lista
-	mem_list_init();
+	if (isOn == 0)
+	{
+		mem_list_init();
+		isOn = 1;
+	}
 	// alocam memoria folosind mmap (rezervam memorie)
 	memory = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
