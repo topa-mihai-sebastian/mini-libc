@@ -7,18 +7,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-// se da malloc pe aceasi adresa
-static int isOn = 0;
-
 void *malloc(size_t size)
 {
 	void *memory;
 	// initializam lista
-	if (isOn == 0)
-	{
-		mem_list_init();
-		isOn = 1;
-	}
+	mem_list_init();
+
 	// alocam memoria folosind mmap (rezervam memorie)
 	memory = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 
@@ -40,7 +34,10 @@ void *malloc(size_t size)
 
 void *calloc(size_t nmemb, size_t size)
 {
+	// calculam marimea pe care o aloc
+	// marimea unui elemet * nr de elemente
 	size_t total_size = nmemb * size;
+	// folosesc mallocapo setez toate valorile la 0 cu memset
 
 	void *memory = malloc(total_size);
 	if (memory == NULL)
@@ -124,17 +121,17 @@ void *realloc(void *ptr, size_t size)
 void *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
 	size_t total_size = nmemb * size;
-
-	if (nmemb != 0 && total_size / nmemb != size)
-	{
-		return NULL;
-	}
-
+	// verific sa nu existe overflow
+	// if (nmemb != 0 && total_size / nmemb != size)
+	//{
+	//	return NULL;
+	//}
+	// daca inputul ptr este NULL functia este un fel de calloc
 	if (ptr == NULL)
 	{
 		return calloc(nmemb, size);
 	}
-
+	// daca marimea este 0
 	if (nmemb == 0 || size == 0)
 	{
 		free(ptr);
