@@ -9,9 +9,14 @@ int stat(const char *restrict path, struct stat *restrict buf)
 {
 	/* TODO: Implement stat(). */
 
-	int st = syscall(__NR_stat, path, buf);
+	int st = (int)syscall(__NR_stat, path, buf);
 	if (st == -1)
 	{
+		if (errno == ENOENT)
+		{
+			// test_stat_non_existent_file
+			return -1;
+		}
 		return -1;
 	}
 	return 0;
